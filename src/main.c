@@ -6,7 +6,7 @@
 /*   By: josmanov <josmanov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:48:46 by josmanov          #+#    #+#             */
-/*   Updated: 2025/01/27 01:57:08 by josmanov         ###   ########.fr       */
+/*   Updated: 2025/01/28 02:51:59 by josmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/so_long.h"
@@ -23,7 +23,7 @@ static int	initialize_game(t_game *game)
 	map_h_pixels = game->map_height_pixels;
 	game->move_count = 0;
 	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
-	game->mlx = mlx_init(map_w_pixels, map_h_pixels, "so_long", false);
+	game->mlx = mlx_init(map_w_pixels, map_h_pixels, "so_long", true);
 	if (!game->mlx)
 		return (0);
 	game->tex = ft_calloc(1, sizeof(t_textures));
@@ -36,36 +36,21 @@ static int	initialize_game(t_game *game)
 static void	game_cleanup(t_game *game)
 {
 	mlx_terminate(game->mlx);
-	cleanup_enemies(game);
 	free_map(game->map);
 	free(game->tex);
 	free(game->img);
-}
-
-void	print_exit(t_game *game)
-{
-	int	collected;
-
-	collected = game->c_count - game->n_collect;
-	ft_printf("*------------------------------*\n");
-	ft_printf("| ****** [Final Stats} ******  |\n");
-	ft_printf("*------------------------------*\n");
-	ft_printf("| Total Moves:   %d - Steps\n", game->move_count);
-	ft_printf("| Total Time:    %d - Seconds\n", (int)game->final_time);
-	ft_printf("| Total Saved: %d/%d - Hostages\n", collected, game->c_count);
-	ft_printf("*------------------------------*\n");
 }
 
 int	init_game_window(t_game *game)
 {
 	if (!initialize_game(game))
 		return (0);
-	get_textures(game);
-	get_images(game);
+	if (!get_textures(game))
+		return (0);
+	if (!get_images(game))
+		return (0);
 	draw_map(game, game->img);
-	init_enemies(game);
 	mlx_key_hook(game->mlx, &my_key_hook, game);
-	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_loop(game->mlx);
 	game_cleanup(game);
 	return (1);
@@ -76,7 +61,6 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	ft_memset(&game, 0, sizeof(t_game));
-	game.final_time = 0.0;
 	if (argc != 2)
 		return (ft_printf("Error: Enter ./so_long (map name).ber\n"), 1);
 	if (!check_extension(argv[1]))
@@ -90,8 +74,8 @@ int	main(int argc, char **argv)
 	if (!valid_path(&game, argv[1]))
 	{
 		free_map(game.map);
-		ft_printf("Error: Player has no path to Exit (E) or ");
-		return (ft_printf("Collectible (C).\n"), 1);
+		ft_printf("Error: Player has no path to Collectable (C) or ");
+		return (ft_printf("Exit (E).\n"), 1);
 	}
 	if (!init_game_window(&game))
 		return (ft_printf("Error: Game initialization failed\n"), 1);

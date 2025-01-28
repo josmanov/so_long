@@ -6,25 +6,17 @@
 /*   By: josmanov <josmanov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 19:01:51 by josmanov          #+#    #+#             */
-/*   Updated: 2025/01/27 00:08:35 by josmanov         ###   ########.fr       */
+/*   Updated: 2025/01/28 01:47:30 by josmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/so_long.h"
 
-static void	update_player_position(t_game *game, int dx, int dy, bool face_left)
+static void	update_player_position(t_game *game, int dx, int dy)
 {
 	game->img->player->instances[0].x += dx * game->tile_size;
 	game->img->player->instances[0].y += dy * game->tile_size;
-	game->img->player_left->instances[0].x += dx * game->tile_size;
-	game->img->player_left->instances[0].y += dy * game->tile_size;
-	game->facing_left = face_left;
-	game->img->player->instances[0].enabled = !face_left;
-	game->img->player_left->instances[0].enabled = face_left;
 	game->move_count++;
-	ft_printf("| MOVES: [%i]\n", game->move_count);
-	ft_printf("----------------\n");
-	update_move_count_display(game);
-	enemy_check_collision(game);
+	ft_printf("MOVES: %i\n", game->move_count);
 }
 
 void	move_up(t_game *game)
@@ -34,9 +26,10 @@ void	move_up(t_game *game)
 
 	x = game->img->player->instances[0].x / TILE_SIZE;
 	y = game->img->player->instances[0].y / TILE_SIZE;
-	if (y > 0 && game->map[y - 1][x] != MAP_WALL)
+	if (y > 0 && game->map[y - 1][x] != MAP_WALL &&
+		(game->map[y - 1][x] != MAP_EXIT || game->n_collect == 0))
 	{
-		update_player_position(game, 0, -1, game->facing_left);
+		update_player_position(game, 0, -1);
 		take_collectables(game);
 		check_exit(game);
 	}
@@ -49,9 +42,10 @@ void	move_down(t_game *game)
 
 	x = game->img->player->instances[0].x / TILE_SIZE;
 	y = game->img->player->instances[0].y / TILE_SIZE;
-	if (y < game->map_height - 1 && game->map[y + 1][x] != MAP_WALL)
+	if (y < game->map_height - 1 && game->map[y + 1][x] != MAP_WALL &&
+		(game->map[y + 1][x] != MAP_EXIT || game->n_collect == 0))
 	{
-		update_player_position(game, 0, 1, game->facing_left);
+		update_player_position(game, 0, 1);
 		take_collectables(game);
 		check_exit(game);
 	}
@@ -64,9 +58,10 @@ void	move_left(t_game *game)
 
 	x = game->img->player->instances[0].x / TILE_SIZE;
 	y = game->img->player->instances[0].y / TILE_SIZE;
-	if (x > 0 && game->map[y][x - 1] != MAP_WALL)
+	if (x > 0 && game->map[y][x - 1] != MAP_WALL &&
+		(game->map[y][x - 1] != MAP_EXIT || game->n_collect == 0))
 	{
-		update_player_position(game, -1, 0, true);
+		update_player_position(game, -1, 0);
 		take_collectables(game);
 		check_exit(game);
 	}
@@ -79,9 +74,10 @@ void	move_right(t_game *game)
 
 	x = game->img->player->instances[0].x / TILE_SIZE;
 	y = game->img->player->instances[0].y / TILE_SIZE;
-	if (x < game->map_width -1 && game->map[y][x + 1] != MAP_WALL)
+	if (x < game->map_width - 1 && game->map[y][x + 1] != MAP_WALL &&
+		(game->map[y][x + 1] != MAP_EXIT || game->n_collect == 0))
 	{
-		update_player_position(game, 1, 0, false);
+		update_player_position(game, 1, 0);
 		take_collectables(game);
 		check_exit(game);
 	}

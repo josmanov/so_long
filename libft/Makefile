@@ -6,7 +6,7 @@
 #    By: josmanov <josmanov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 08:17:17 by josmanov          #+#    #+#              #
-#    Updated: 2025/01/25 18:44:21 by josmanov         ###   ########.fr        #
+#    Updated: 2025/01/28 02:20:20 by josmanov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,13 +49,13 @@ SRCS = ft_isalpha.c \
 	   ft_putstr_fd.c \
 	   ft_putendl_fd.c \
 	   ft_putnbr_fd.c \
-	   ft_printf/ft_printf.c \
-	   ft_printf/ft_putchar.c \
-	   ft_printf/ft_putstr.c \
-	   ft_printf/ft_putnbr.c \
-	   ft_printf/ft_puthex.c \
-	   ft_printf/ft_putpointer.c \
-	   ft_printf/ft_putunsigned.c \
+	   ft_printf.c \
+	   ft_putchar.c \
+	   ft_putstr.c \
+	   ft_putnbr.c \
+	   ft_puthex.c \
+	   ft_putpointer.c \
+	   ft_putunsigned.c \
 	   get_next_line.c \
 	   get_next_line_utils.c
 

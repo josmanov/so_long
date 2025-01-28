@@ -6,10 +6,9 @@
 /*   By: josmanov <josmanov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:57:26 by josmanov          #+#    #+#             */
-/*   Updated: 2025/01/26 18:58:12 by josmanov         ###   ########.fr       */
+/*   Updated: 2025/01/27 19:10:40 by josmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../includes/so_long.h"
 
 void	draw_player(t_game *game, t_images *img, int x, int y)
@@ -19,11 +18,9 @@ void	draw_player(t_game *game, t_images *img, int x, int y)
 
 	x_tile_size = x * TILE_SIZE;
 	y_tile_size = y * TILE_SIZE;
-	if (!img->player || !img->player_left)
-		error_exit("Player textures failed to load", game);
+	if (!img->player)
+		error_exit("Player texture failed to load", game);
 	mlx_image_to_window(game->mlx, img->player, x_tile_size, y_tile_size);
-	mlx_image_to_window(game->mlx, img->player_left, x_tile_size, y_tile_size);
-	img->player_left->instances[0].enabled = false;
 }
 
 void	draw_player_layer(t_game *game, t_images *img)

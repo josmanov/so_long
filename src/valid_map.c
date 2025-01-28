@@ -6,7 +6,7 @@
 /*   By: josmanov <josmanov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:14:48 by josmanov          #+#    #+#             */
-/*   Updated: 2025/01/27 01:52:13 by josmanov         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:38:15 by josmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	rectangle_map(char **map)
 	int		i;
 
 	len = ft_strlen(map[0]);
+	if (len == 0)
+		return (0);
 	i = 1;
 	while (map[i])
 	{
@@ -46,7 +48,7 @@ int	invalid_map(char **map)
 		x = -1;
 		while (map[y][++x])
 		{
-			if (!ft_strchr("01CEPX", map[y][x]))
+			if (!ft_strchr("01CEP", map[y][x]))
 				return (1);
 		}
 	}

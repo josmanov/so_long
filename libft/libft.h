@@ -6,17 +6,17 @@
 /*   By: josmanov <josmanov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 08:17:09 by josmanov          #+#    #+#             */
-/*   Updated: 2025/01/27 02:40:56 by josmanov         ###   ########.fr       */
+/*   Updated: 2025/01/28 02:07:07 by josmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include "ft_printf/ft_printf.h"
+# include <unistd.h>
+# include <stdlib.h>
 # include <stdint.h>
 # include <stddef.h>
-# include <stdlib.h>
-# include <unistd.h>
+# include <stdarg.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
@@ -83,6 +83,14 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+int		ft_printf(const char *format, ...);
+int		ft_putchar(int c);
+int		ft_putstr(char *str);
+int		ft_putnbr(int n);
+int		ft_puthex(unsigned long n, const char format);
+int		ft_putunsigned(unsigned int n);
+int		ft_putpointer(void *ptr);
 
 char	*get_next_line(int fd);
 void	create_list(t_list **lst, int fd);

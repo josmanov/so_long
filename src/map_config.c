@@ -6,7 +6,7 @@
 /*   By: josmanov <josmanov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:30:55 by josmanov          #+#    #+#             */
-/*   Updated: 2025/01/27 02:12:25 by josmanov         ###   ########.fr       */
+/*   Updated: 2025/01/28 04:02:47 by josmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/so_long.h"
@@ -25,32 +25,51 @@ void	size_map(t_game *game, char **map)
 	game->map_height_pixels = game->map_height * TILE_SIZE;
 }
 
+static char	**check_empty_lines(char **map)
+{
+	int	i;
+
+	if (!map)
+		return (NULL);
+	i = 0;
+	while (map[i])
+	{
+		if (ft_strlen(map[i]) == 0)
+		{
+			free_map(map);
+			return (NULL);
+		}
+		i++;
+	}
+	return (map);
+}
+
 char	**read_map(char *map_read)
 {
 	int		fd;
 	char	*line;
-	char	*joined;
-	char	*temp;
+	char	*temp_join;
+	char	*temp_line;
 	char	**map;
 
 	fd = open(map_read, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	joined = ft_strdup("");
+	temp_join = ft_strdup("");
+	if (fd < 0 || !temp_join)
+		return (free(temp_join), NULL);
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		temp = joined;
-		joined = ft_strjoin(joined, line);
-		free(temp);
+		temp_line = temp_join;
+		temp_join = ft_strjoin(temp_join, line);
+		free(temp_line);
 		free(line);
 	}
-	map = ft_split(joined, '\n');
-	free(joined);
 	close(fd);
-	return (map);
+	map = ft_split(temp_join, '\n');
+	free(temp_join);
+	return (check_empty_lines(map));
 }
 
 int	min_map(t_game *game, char **map)
@@ -103,22 +122,4 @@ int	*start_pos(char **map)
 	}
 	free(pos);
 	return (NULL);
-}
-
-int	check_flood(char **map)
-{
-	int	y;
-	int	x;
-
-	y = -1;
-	while (map[++y])
-	{
-		x = -1;
-		while (map[y][++x])
-		{
-			if (map[y][x] == 'C' || map[y][x] == 'E')
-				return (0);
-		}
-	}
-	return (1);
 }

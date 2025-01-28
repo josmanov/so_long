@@ -6,7 +6,7 @@
 /*   By: josmanov <josmanov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 00:22:26 by josmanov          #+#    #+#             */
-/*   Updated: 2024/06/01 21:35:10 by josmanov         ###   ########.fr       */
+/*   Updated: 2025/01/27 06:41:27 by josmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -19,7 +19,7 @@ static void	free_tokens(char **token_v, int position)
 	while (i < position)
 	{
 		free(token_v[i]);
-		++i;
+		i++;
 	}
 	free(token_v);
 }
@@ -27,7 +27,7 @@ static void	free_tokens(char **token_v, int position)
 static int	valid_malloc(char **token_v, int position, size_t buffer)
 {
 	token_v[position] = malloc(buffer + 1);
-	if (NULL == token_v[position])
+	if (token_v[position] == NULL)
 	{
 		free_tokens(token_v, position);
 		return (1);
@@ -37,27 +37,26 @@ static int	valid_malloc(char **token_v, int position, size_t buffer)
 
 static int	add_str(char **token_v, char const *s, char delimeter)
 {
-	size_t	len;
-	int		i;
+	const char	*start;
+	size_t		len;
+	int			i;
 
 	i = 0;
 	while (*s)
 	{
 		len = 0;
-		while (*s == delimeter && *s)
-			s++;
+		start = s;
 		while (*s != delimeter && *s)
 		{
 			len++;
 			s++;
 		}
-		if (len)
-		{
-			if (valid_malloc(token_v, i, len))
-				return (1);
-			ft_strlcpy(token_v[i], s - len, len + 1);
-			i++;
-		}
+		if (valid_malloc(token_v, i, len))
+			return (1);
+		ft_strlcpy(token_v[i], start, len + 1);
+		i++;
+		if (*s == delimeter)
+			s++;
 	}
 	return (0);
 }
@@ -65,23 +64,25 @@ static int	add_str(char **token_v, char const *s, char delimeter)
 static size_t	count_tokens(char const *s, char delimeter)
 {
 	size_t	tokens;
-	int		inside_token;
+	int		in_token;
 
 	tokens = 0;
+	in_token = 0;
 	while (*s)
 	{
-		inside_token = 0;
-		while (*s == delimeter && *s)
-			s++;
-		while (*s != delimeter && *s)
+		if (*s != delimeter)
 		{
-			if (!inside_token)
-			{
-				++tokens;
-				inside_token = 1;
-			}
-			s++;
+			if (!in_token)
+				tokens++;
+			in_token = 0;
 		}
+		else
+		{
+			if (!in_token)
+				tokens++;
+			in_token = 1;
+		}
+		s++;
 	}
 	return (tokens);
 }
@@ -105,9 +106,7 @@ char	**ft_split(char const *s, char c)
 		++i;
 	}
 	if (add_str(token_v, s, c))
-	{
 		return (NULL);
-	}
 	token_v[tokens] = NULL;
 	return (token_v);
 }

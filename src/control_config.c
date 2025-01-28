@@ -6,7 +6,7 @@
 /*   By: josmanov <josmanov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:50:04 by josmanov          #+#    #+#             */
-/*   Updated: 2025/01/27 01:11:22 by josmanov         ###   ########.fr       */
+/*   Updated: 2025/01/27 19:14:57 by josmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ void	check_exit(t_game *game)
 	py = game->img->player->instances[0].y / TILE_SIZE;
 	if (game->map[py][px] == MAP_EXIT && game->n_collect == 0)
 	{
-		ft_printf("\n********************************\n");
-		ft_printf("| You Escaped :) - Well done!  |\n");
-		game->final_time = mlx_get_time();
+		ft_printf("You win!\n");
 		clean_exit(game, EXIT_SUCCESS);
 	}
 }

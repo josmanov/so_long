@@ -6,7 +6,7 @@
 /*   By: josmanov <josmanov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:26:28 by josmanov          #+#    #+#             */
-/*   Updated: 2025/01/26 22:08:53 by josmanov         ###   ########.fr       */
+/*   Updated: 2025/01/27 19:59:14 by josmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/so_long.h"
@@ -31,9 +31,6 @@ void	clean_exit(t_game *game, int code)
 		free(game->tex);
 	if (game->img)
 		free(game->img);
-	if (game->enemies)
-		free(game->enemies);
-	print_exit(game);
 	exit(code);
 }
 

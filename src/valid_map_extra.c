@@ -6,7 +6,7 @@
 /*   By: josmanov <josmanov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:56:20 by josmanov          #+#    #+#             */
-/*   Updated: 2025/01/26 19:30:42 by josmanov         ###   ########.fr       */
+/*   Updated: 2025/01/28 01:43:45 by josmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/so_long.h"
@@ -17,11 +17,36 @@ static void	flood_fill(t_game *game, int y, int x)
 		return ;
 	if (game->map_2[y][x] == '1' || game->map_2[y][x] == 'F')
 		return ;
+	if (game->map_2[y][x] == 'E')
+	{
+		game->map_2[y][x] = 'F';
+		return ;
+	}
 	game->map_2[y][x] = 'F';
 	flood_fill(game, y + 1, x);
 	flood_fill(game, y - 1, x);
 	flood_fill(game, y, x + 1);
 	flood_fill(game, y, x - 1);
+}
+
+static int	check_flood(char **map)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'C' || map[y][x] == 'E')
+				return (0);
+			x++;
+		}
+		y++;
+	}
+	return (1);
 }
 
 int	valid_path(t_game *game, char *fd)
