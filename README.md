@@ -6,6 +6,39 @@ on a quest to collect flowers or save hostages before escaping on your horse �
 
 ---
 
+## ⚙️ Installation
+
+1. **Clone the repository**:
+
+    ```bash
+    git clone https://github.com/josmanov/so_long.git
+    ```
+
+2. **Enter the project directory**:
+
+    ```bash
+    cd so_long
+    ```
+
+3. **For the mandatory version** (Collect flowers and escape):
+
+    ```bash
+    make
+    ```
+
+4. **For the bonus version** (Save hostages and escape):
+
+    ```bash
+    make bonus
+    ```
+-  To fully clean up the respository:
+
+    ```bash
+    make fclean
+    ```
+    
+---
+
 ## 🕹️ Controls
 
 - **W** – Move Up ⬆️  
