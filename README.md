@@ -1,5 +1,5 @@
 # So Long 𒅒𒈔𒅒𒇫𒄆🥷🏼🎎
-
+![so_long](images/so_long_terminal.png)
 So Long is a simple 2D game project where you play as a **samurai** 👹  
 on a quest to collect flowers or save hostages before escaping on your horse 🐴.
 
