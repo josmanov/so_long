@@ -1,5 +1,5 @@
-# So Long 𒅒𒈔𒅒𒇫𒄆🥷🏼🎎
-![so_long](images/so_long_terminal.png)
+![so_longl](images/so_long.png)
+# 𒅒𒈔𒅒𒇫𒄆🥷🏼🎎
 So Long is a simple 2D game project where you play as a **samurai** 👹  
 on a quest to collect flowers or save hostages before escaping on your horse 🐴.
 
@@ -42,12 +42,18 @@ on a quest to collect flowers or save hostages before escaping on your horse �
 
 ## 👾 Gameplay
 
+
 ### **Mandatory Version**:
+
+<img src="images/so_long_terminal.png" alt="so_long_terminal" width="400" height="200">
+
 - You control the **samurai** 👹.
 - Your goal is to **collect all the flowers** 🌸.
 - Once all flowers are collected, you can **escape on your horse** 🐴 to finish the level!
-
 ### **Bonus Version**:
+
+<img src="images/so_long_terminal_bonus.png" alt="so_long_terminal_bonus" width="400" height="200">
+
 - Same gameplay as the mandatory version, but with an extra twist: 
 - This time youmust **save all the hostages** 🧑‍🤝‍🧑 before escaping on your horse.
 - Watch out for the **ninjas** 🥷 patrolling the map!
