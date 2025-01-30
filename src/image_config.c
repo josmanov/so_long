@@ -6,7 +6,7 @@
 /*   By: josmanov <josmanov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:01:37 by josmanov          #+#    #+#             */
-/*   Updated: 2025/01/28 01:38:08 by josmanov         ###   ########.fr       */
+/*   Updated: 2025/01/31 01:27:07 by josmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/so_long.h"
@@ -34,6 +34,15 @@ int	get_textures(t_game *game)
 		|| !game->tex->exit)
 		return (ft_printf("Error: Couldnt load textures\n"), 0);
 	return (1);
+}
+
+void	cleanup_images(t_game *game)
+{
+	mlx_delete_image(game->mlx, game->img->floor);
+	mlx_delete_image(game->mlx, game->img->wall);
+	mlx_delete_image(game->mlx, game->img->collect);
+	mlx_delete_image(game->mlx, game->img->player);
+	mlx_delete_image(game->mlx, game->img->exit);
 }
 
 int	get_images(t_game *game)

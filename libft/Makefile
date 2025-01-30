@@ -6,7 +6,7 @@
 #    By: josmanov <josmanov@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 08:17:17 by josmanov          #+#    #+#              #
-#    Updated: 2025/01/28 02:20:20 by josmanov         ###   ########.fr        #
+#    Updated: 2025/01/31 01:21:51 by josmanov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
 NAME = libft.a
 
-CC = gcc
+CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 

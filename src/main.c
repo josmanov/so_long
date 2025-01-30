@@ -6,7 +6,7 @@
 /*   By: josmanov <josmanov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:48:46 by josmanov          #+#    #+#             */
-/*   Updated: 2025/01/28 02:51:59 by josmanov         ###   ########.fr       */
+/*   Updated: 2025/01/31 01:23:34 by josmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/so_long.h"
@@ -35,6 +35,7 @@ static int	initialize_game(t_game *game)
 
 static void	game_cleanup(t_game *game)
 {
+	cleanup_images(game);
 	mlx_terminate(game->mlx);
 	free_map(game->map);
 	free(game->tex);

@@ -6,7 +6,7 @@
 /*   By: josmanov <josmanov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:56:20 by josmanov          #+#    #+#             */
-/*   Updated: 2025/01/28 01:43:45 by josmanov         ###   ########.fr       */
+/*   Updated: 2025/01/31 01:23:07 by josmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/so_long.h"
@@ -17,11 +17,6 @@ static void	flood_fill(t_game *game, int y, int x)
 		return ;
 	if (game->map_2[y][x] == '1' || game->map_2[y][x] == 'F')
 		return ;
-	if (game->map_2[y][x] == 'E')
-	{
-		game->map_2[y][x] = 'F';
-		return ;
-	}
 	game->map_2[y][x] = 'F';
 	flood_fill(game, y + 1, x);
 	flood_fill(game, y - 1, x);

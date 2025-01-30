@@ -6,7 +6,7 @@
 /*   By: josmanov <josmanov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:35:09 by josmanov          #+#    #+#             */
-/*   Updated: 2025/01/28 01:40:09 by josmanov         ###   ########.fr       */
+/*   Updated: 2025/01/31 01:27:16 by josmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,8 @@ void	draw_player_layer(t_game *game, t_images *img);
 void	draw_player(t_game *game, t_images *img, int x, int y);
 void	check_exit(t_game *game);
 void	print_exit(t_game *game);
+
+
+void	cleanup_images(t_game *game);
 
 #endif
